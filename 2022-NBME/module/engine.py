@@ -125,7 +125,9 @@ def valid_fn(
                     remain=timeSince(start, float(step + 1) / len(dataloader)),
                 )
             )
-    predictions = np.concatenate(preds)
+    predictions = np.concatenate(preds).reshape(
+        (len(dataloader), Config.model.max_length)
+    )
     return losses.avg, predictions
 
 
