@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import List, Tuple
+from typing import Tuple
 
 import pandas as pd
 import torch
@@ -180,7 +180,7 @@ class Config:
     epochs: int = 1
     batch_size: int = 8
     n_fold: int = 4
-    trn_fold: List[int] = [0, 1, 2, 3]
+    trn_fold: Tuple[int, ...] = (0, 1, 2, 3)
     seed: int = 0
     log_freq: int = 4000
     num_workers: int = 4
