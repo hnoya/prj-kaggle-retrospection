@@ -23,6 +23,29 @@ except ModuleNotFoundError:
     raise
 
 
+@dataclass
+class Input:
+    """入力ディレクトリ・ファイル"""
+
+    base: str = "./data"
+    train_csv: str = f"{base}/train.csv"
+    features_csv: str = f"{base}/features.csv"
+    pt_notes_csv: str = f"{base}/patient_notes.csv"
+    test_csv: str = f"{base}/test.csv"
+    submit_csv: str = f"{base}/sample_submission.csv"
+
+
+@dataclass
+class Output:
+    """出力ディレクトリ・ファイル"""
+
+    base: str = "./weights"
+    config: str = f"{base}/config.pth"
+    oof_df: str = f"{base}/oof_df.pkl"
+    tokenizer: str = f"{base}/tokenizer/"
+    submit_csv: str = "./submission.csv"
+
+
 def get_tokenizer(model_name: str) -> PreTrainedTokenizerBase:
     """tokenizerを取得する
 
@@ -164,26 +187,3 @@ class pt_notes_col:
     feature_num: str = train_col.feature_num
     case_num: str = train_col.case_num
     pn_history: str = "pn_history"
-
-
-@dataclass
-class Input:
-    """入力ディレクトリ・ファイル"""
-
-    base: str = "./data"
-    train_csv: str = f"{base}/train.csv"
-    features_csv: str = f"{base}/features.csv"
-    pt_notes_csv: str = f"{base}/patient_notes.csv"
-    test_csv: str = f"{base}/test.csv"
-    submit_csv: str = f"{base}/sample_submission.csv"
-
-
-@dataclass
-class Output:
-    """出力ディレクトリ・ファイル"""
-
-    base: str = "./weights"
-    config: str = f"{base}/config.pth"
-    oof_df: str = f"{base}/oof_df.pkl"
-    tokenizer: str = f"{base}/tokenizer/"
-    submit_csv: str = "./submission.csv"
