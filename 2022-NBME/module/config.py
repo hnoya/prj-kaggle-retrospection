@@ -46,6 +46,43 @@ class Output:
     submit_csv: str = "./submission.csv"
 
 
+@dataclass
+class train_col:
+    """train.csvの列名"""
+
+    annotation: str = "annotation"
+    location: str = "location"
+    feature_num: str = "feature_num"
+    case_num: str = "case_num"
+    pn_num: str = "pn_num"
+    # Add
+    feature_text: str = "feature_text"
+    pn_history: str = "pn_history"
+    annotation_length: str = "annotation_length"
+    input_lengths: str = "input_lengths"
+    batch_max_length: str = "batch_max_length"
+    clean_text: str = "clean_text"
+    fold: str = "fold"
+
+
+@dataclass
+class feature_col:
+    """features.csvの列名"""
+
+    feature_num: str = train_col.feature_num
+    case_num: str = train_col.case_num
+    feature_text: str = "feature_text"
+
+
+@dataclass
+class pt_notes_col:
+    """patient_notes.csvの列名"""
+
+    feature_num: str = train_col.feature_num
+    case_num: str = train_col.case_num
+    pn_history: str = "pn_history"
+
+
 def get_tokenizer(model_name: str) -> PreTrainedTokenizerBase:
     """tokenizerを取得する
 
@@ -150,40 +187,3 @@ class Config:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = Model
     optimizer = Optimizer
-
-
-@dataclass
-class train_col:
-    """train.csvの列名"""
-
-    annotation: str = "annotation"
-    location: str = "location"
-    feature_num: str = "feature_num"
-    case_num: str = "case_num"
-    pn_num: str = "pn_num"
-    # Add
-    feature_text: str = "feature_text"
-    pn_history: str = "pn_history"
-    annotation_length: str = "annotation_length"
-    input_lengths: str = "input_lengths"
-    batch_max_length: str = "batch_max_length"
-    clean_text: str = "clean_text"
-    fold: str = "fold"
-
-
-@dataclass
-class feature_col:
-    """features.csvの列名"""
-
-    feature_num: str = train_col.feature_num
-    case_num: str = train_col.case_num
-    feature_text: str = "feature_text"
-
-
-@dataclass
-class pt_notes_col:
-    """patient_notes.csvの列名"""
-
-    feature_num: str = train_col.feature_num
-    case_num: str = train_col.case_num
-    pn_history: str = "pn_history"
