@@ -67,9 +67,7 @@ def get_char_probs(
     return results
 
 
-def get_results(
-    char_probs: List[np.ndarray], threshold: float = 0.5
-) -> List[List[str]]:
+def get_results(char_probs: List[np.ndarray], threshold: float = 0.5) -> List[str]:
     """予測結果を取得する
 
     Args:
@@ -77,9 +75,9 @@ def get_results(
         threshold (float, optional): 正とみなす確率のしきい値. Defaults to 0.5.
 
     Returns:
-        List[List[str]]: 予測結果
+        List[str]: 予測結果
     """
-    results: List[List[str]] = []
+    results: List[str] = []
     for char_prob in char_probs:
         result_arr: np.ndarray = np.where(char_prob >= threshold)[0] + 1
         result_idxs: List[List[int]] = [
@@ -89,15 +87,16 @@ def get_results(
             )
         ]
         result: List[str] = [f"{min(r)} {max(r)}" for r in result_idxs]
-        results.append(result)
+        result_str = ";".join(result)
+        results.append(result_str)
     return results
 
 
-def get_predictions(results: List[List[str]]) -> List[List[List[int]]]:
+def get_predictions(results: List[str]) -> List[List[List[int]]]:
     """予測行列を取得する
 
     Args:
-        results (List[List[str]]): 結果のスパン行列
+        results (List[str]): 結果のスパン行列
 
     Returns:
         List[List[List[int]]]: 予測のスパン行列
@@ -106,7 +105,7 @@ def get_predictions(results: List[List[str]]) -> List[List[List[int]]]:
     for result in results:
         prediction: List[List[int]] = []
         if result != "":
-            for loc in [s.split() for s in result.split(";")]:  # type: ignore # TODO
+            for loc in [s.split() for s in result.split(";")]:
                 start, end = int(loc[0]), int(loc[1])
                 prediction.append([start, end])
         predictions.append(prediction)
