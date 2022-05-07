@@ -126,7 +126,7 @@ def valid_fn(
                 )
             )
     predictions = np.concatenate(preds).reshape(
-        (len(dataloader), Config.model.max_length)
+        (-1, Config.model.max_length)
     )
     return losses.avg, predictions
 
