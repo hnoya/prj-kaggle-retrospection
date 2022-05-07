@@ -16,9 +16,9 @@ logger = get_logger(__name__)
 def train_fn(
     dataloader: DataLoader,
     model: nn.Module,
-    criterion: nn.Module._Loss,  # type: ignore
+    criterion: nn.modules.loss._Loss,
     optimizer: optim.Optimizer,
-    scheduler: optim._LRScheduler,  # type: ignore
+    scheduler: optim.lr_scheduler._LRScheduler,
     epoch: int,
     device: torch._C.device,
 ) -> float:
