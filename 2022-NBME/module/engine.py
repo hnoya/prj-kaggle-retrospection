@@ -27,9 +27,9 @@ def train_fn(
     Args:
         dataloader (DataLoader): データローダー
         model (nn.Module): モデル
-        criterion (nn.Module._Loss): 損失関数
+        criterion (nn.modules.loss._Loss): 損失関数
         optimizer (optim.Optimizer): 最適化アルゴリズム
-        scheduler (optim._LRScheduler): 学習率スケジューラ
+        scheduler (optim.lr_scheduler._LRScheduler): 学習率スケジューラ
         device (torch._C.device): 使用するデバイス. torch.device("cpu") or torch.device("cuda")
 
     Returns:
@@ -76,21 +76,21 @@ def train_fn(
                     remain=timeSince(start, float(step + 1) / len(dataloader)),
                     loss=losses,
                     grad_norm=grad_norm,
-                    lr=scheduler.get_lr()[0],
+                    lr=scheduler.get_lr()[0],  # type: ignore
                 )
             )
     return losses.avg
 
 
 def valid_fn(
-    dataloader: DataLoader, model: nn.Module, criterion: nn._Loss, device: torch._C.device  # type: ignore
+    dataloader: DataLoader, model: nn.Module, criterion: nn.modules.loss._Loss, device: torch._C.device  # type: ignore
 ) -> Tuple[float, np.ndarray]:
     """検証用関数
 
     Args:
         dataloader (DataLoader): データローダー
         model (nn.Module): モデル
-        criterion (nn._Loss): 損失関数
+        criterion (nn.modules.loss._Loss): 損失関数
         device (torch._C.device): 使用するデバイス. torch.device("cpu") or torch.device("cuda")
 
     Returns:
