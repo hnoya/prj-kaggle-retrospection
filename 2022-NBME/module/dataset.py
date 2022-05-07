@@ -249,7 +249,7 @@ def add_validation_id(df: pd.DataFrame) -> pd.DataFrame:
         n_splits=Config.n_fold, shuffle=True, random_state=Config.seed
     )
     for fold_idx, (train_idx, valid_idx) in enumerate(
-        foldmaker.split(df, df[train_col.location], df[train_col.pn_num])
+        foldmaker.split(df, df[train_col.case_num], df[train_col.pn_num])
     ):
         df.loc[valid_idx, train_col.fold] = fold_idx
     df[train_col.fold] = df[train_col.fold].astype(int)
