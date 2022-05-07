@@ -126,7 +126,7 @@ def valid_fn(
                 )
             )
     predictions = np.concatenate(preds)
-    return loss.avg, predictions
+    return losses.avg, predictions
 
 
 def inference_fn(
