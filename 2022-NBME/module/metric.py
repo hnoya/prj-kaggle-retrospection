@@ -32,9 +32,9 @@ def spans_to_binary(
         np.ndarray: 2値行列
     """
     max_length = np.max(spans) if max_lenght is None else max_lenght
-    binary_arr = np.zeros(max_length, dtype=np.int8)
+    binary_arr = np.zeros(max_length)
     for start, end in spans:
-        binary_arr[start, end] = 1
+        binary_arr[start:end] = 1
     return binary_arr
 
 
